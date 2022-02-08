@@ -88,7 +88,9 @@ def harvest_spdx(filepath=None):
         licenses[license_['licenseId']] = {
             'id': license_['licenseId'],
             # Last link is the most recent/valid
-            'url': license_['seeAlso'][-1],
+            'url': (license_['seeAlso'][-1]
+                    if license_['seeAlso']
+                    else license_['reference']),
             'title': license_['name'],
             'family': '',
             'maintainer': '',
