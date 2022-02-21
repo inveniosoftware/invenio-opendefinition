@@ -10,6 +10,10 @@
 Changes
 =======
 
+Version v1.0.0a10 (released 2022-02-21)
+
+- fix fallback for missing `seeAlso` url
+
 Version v1.0.0a9 (released 2019-10-02)
 
 - Initial public release.
