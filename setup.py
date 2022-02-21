@@ -24,7 +24,7 @@ invenio_search_version = '1.2.0'
 
 extras_require = {
     'docs': [
-        'Sphinx>=3',
+        'Sphinx>=4.2.0',
     ],
     'elasticsearch2': [
         'invenio-search[elasticsearch2]>={}'.format(invenio_search_version),
@@ -37,6 +37,8 @@ extras_require = {
     ],
     'elasticsearch7': [
         'invenio-search[elasticsearch7]>={}'.format(invenio_search_version),
+        # unsupported ES version issue
+        'elasticsearch>=7.0.0,<7.14',
     ],
     'tests': tests_require,
 }
@@ -66,7 +68,7 @@ install_requires = [
     'jsonresolver>=0.2.1',
     'jsonschema>=2.5.1',
     'requests>=2.9.1',
-    'invenio-db[versioning]>=1.0.0',
+    'invenio-db[versioning]>=1.0.9',
 ]
 
 packages = find_packages()
