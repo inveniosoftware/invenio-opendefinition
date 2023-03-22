@@ -13,7 +13,7 @@
         "type": "boolean"
       },
       "family": {
-        "type": "text"
+        "type": "keyword"
       },
       "id": {
         "type": "keyword"
@@ -22,7 +22,7 @@
         "type": "boolean"
       },
       "maintainer": {
-        "type": "text"
+        "type": "keyword"
       },
       "legacy_ids": {
         "type": "keyword"
@@ -37,7 +37,12 @@
         "type": "keyword"
       },
       "title": {
-        "type": "text"
+        "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
       },
       "url": {
         "type": "keyword"
@@ -46,6 +51,20 @@
         "type": "completion",
         "analyzer": "standard",
         "search_analyzer": "standard"
+      },
+      "_created": {
+        "type": "date",
+        "copy_to": "created"
+      },
+      "_updated": {
+        "type": "date",
+        "copy_to": "updated"
+      },
+      "created": {
+        "type": "date"
+      },
+      "updated": {
+        "type": "date"
       }
     }
   }
