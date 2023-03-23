@@ -17,7 +17,8 @@ history = open('CHANGES.rst').read()
 
 tests_require = [
     'httpretty>=1.0.3',
-    'pytest-invenio>=1.4.0'
+    'pytest-invenio>=1.4.0',
+    'invenio-db[versioning]>=1.0.9',
 ]
 
 invenio_search_version = '1.2.0'
@@ -68,7 +69,6 @@ install_requires = [
     'jsonresolver>=0.2.1',
     'jsonschema>=2.5.1',
     'requests>=2.9.1',
-    'invenio-db[versioning]>=1.0.9',
 ]
 
 packages = find_packages()
