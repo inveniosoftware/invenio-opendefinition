@@ -10,6 +10,10 @@
 Changes
 =======
 
+Version v1.0.0a12 (released 2023-03-23)
+
+- fix installation dependencies
+
 Version v1.0.0a11 (released 2023-03-23)
 
 - add missing mapping fields and fix types for better search options
