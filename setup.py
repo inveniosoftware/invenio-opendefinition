@@ -27,14 +27,8 @@ extras_require = {
     'docs': [
         'Sphinx>=4.2.0',
     ],
-    'elasticsearch2': [
+    'opensearch2': [
         'invenio-search[elasticsearch2]>={}'.format(invenio_search_version),
-    ],
-    'elasticsearch5': [
-        'invenio-search[elasticsearch5]>={}'.format(invenio_search_version),
-    ],
-    'elasticsearch6': [
-        'invenio-search[elasticsearch6]>={}'.format(invenio_search_version),
     ],
     'elasticsearch7': [
         'invenio-search[elasticsearch7]>={}'.format(invenio_search_version),
@@ -59,7 +53,7 @@ setup_requires = [
 install_requires = [
     'Flask>=1.0.4',
     'click>=7.0',
-    'flask-celeryext>=0.3.4',
+    'invenio-i18n>=2.0.0',
     'invenio-indexer>=1.1.0',
     'invenio-jsonschemas>=1.0.0',
     'invenio-pidstore>=1.0.0',
