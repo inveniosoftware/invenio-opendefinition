@@ -10,23 +10,9 @@
 
 from __future__ import absolute_import, print_function
 
-from elasticsearch import VERSION as ES_VERSION
-
-
 def indexer_receiver(sender, json=None, record=None, index=None,
                      **dummy_kwargs):
     """Connect to before_record_index signal to transform record for ES."""
     if index.startswith('licenses-'):
-        if ES_VERSION[0] == 2:
-            # Generate suggest field
-            json['suggest'] = {
-                'input': [json['id'], json['title']],
-                'output': json['title'],
-                'payload': {
-                    'id': json['id'],
-                    'title': json['title']
-                },
-            }
-        elif ES_VERSION[0] > 2:
-            json['suggest'] = {
-                'input': [json['id'], json['title']]}
+        json['suggest'] = {
+            'input': [json['id'], json['title']]}
