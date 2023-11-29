@@ -18,33 +18,28 @@ history = open('CHANGES.rst').read()
 tests_require = [
     'httpretty>=1.0.3',
     'pytest-invenio>=1.4.0',
-    'invenio-db[versioning]>=1.0.9',
+    'invenio-db[versioning]>=1.0.14',
 ]
 
-invenio_search_version = '1.2.0'
+invenio_search_version = '>=2.0.0,<3.0.0'
 
 extras_require = {
     'docs': [
         'Sphinx>=4.2.0',
     ],
     'opensearch2': [
-        'invenio-search[elasticsearch2]>={}'.format(invenio_search_version),
+        'invenio-search[opensearch2]>=2.0.0,<3.0.0',
+    ],
+    'opensearch1': [
+        'invenio-search[opensearch1]>=2.0.0,<3.0.0',
     ],
     'elasticsearch7': [
-        'invenio-search[elasticsearch7]>={}'.format(invenio_search_version),
+        'invenio-search[elasticsearch7]>=2.0.0,<3.0.0',
         # unsupported ES version issue
         'elasticsearch>=7.0.0,<7.14',
     ],
     'tests': tests_require,
 }
-
-extras_require['all'] = []
-for name, reqs in extras_require.items():
-    if name in (
-            'elasticsearch2', 'elasticsearch5',
-            'elasticsearch6', 'elasticsearch7'):
-        continue
-    extras_require['all'].extend(reqs)
 
 setup_requires = [
     'pytest-runner>=2.7.0',
@@ -54,11 +49,11 @@ install_requires = [
     'Flask>=1.0.4',
     'click>=7.0',
     'invenio-i18n>=2.0.0',
-    'invenio-indexer>=1.1.0',
+    'invenio-indexer>=2.0.0',
     'invenio-jsonschemas>=1.0.0',
     'invenio-pidstore>=1.0.0',
     'invenio-records>=1.0.0',
-    'invenio-records-rest>=1.6.2',
+    'invenio-records-rest>=2.2.0',
     'jsonref>=0.1',
     'jsonresolver>=0.2.1',
     'jsonschema>=2.5.1',
