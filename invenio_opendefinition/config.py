@@ -32,7 +32,6 @@ OPENDEFINITION_REST_ENDPOINTS = dict(
         list_route='/licenses/',
         item_route='/licenses/<pid(od_lic):pid_value>',
         search_index='licenses',
-        search_type=None,
         record_serializers={
             'application/json': (
                 'invenio_records_rest.serializers:json_v1_response'),
