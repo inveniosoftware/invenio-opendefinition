@@ -18,7 +18,6 @@ from os.path import dirname, join
 
 import httpretty
 import pytest
-from elasticsearch.exceptions import RequestError
 from flask import Flask
 from flask.cli import ScriptInfo
 from flask_celeryext import FlaskCeleryExt
@@ -30,6 +29,7 @@ from invenio_pidstore import InvenioPIDStore
 from invenio_records import InvenioRecords
 from invenio_records_rest.utils import PIDConverter
 from invenio_search import InvenioSearch, current_search
+from invenio_search.engine import search
 from sqlalchemy_utils.functions import create_database, database_exists, \
     drop_database
 
@@ -164,7 +164,7 @@ def es(app):
     with app.app_context():
         try:
             list(current_search.create())
-        except RequestError:
+        except search.RequestError:
             list(current_search.delete(ignore=[404]))
             list(current_search.create())
         yield current_search
