@@ -10,6 +10,13 @@
 Changes
 =======
 
+Version v2.0.0a1 (released 2023-11-30)
+
+- breaking change: drops ES2 support
+- global: remove deprecated elasticsearch imports
+- installation: upgrade invenio dependencies
+- rest endpoints: remove deprecated `search_type` param
+
 Version v1.0.0a12 (released 2023-03-23)
 
 - fix installation dependencies
