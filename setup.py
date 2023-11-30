@@ -19,13 +19,14 @@ tests_require = [
     'httpretty>=1.0.3',
     'pytest-invenio>=1.4.0',
     'invenio-db[versioning]>=1.0.14',
+    'Sphinx>=5.0.0'
 ]
 
 invenio_search_version = '>=2.0.0,<3.0.0'
 
 extras_require = {
     'docs': [
-        'Sphinx>=4.2.0',
+        'Sphinx>=5.0.0',
     ],
     'opensearch2': [
         'invenio-search[opensearch2]>=2.0.0,<3.0.0',
