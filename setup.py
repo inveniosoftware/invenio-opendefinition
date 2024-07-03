@@ -22,17 +22,17 @@ tests_require = [
     'Sphinx>=5.0.0'
 ]
 
-invenio_search_version = '>=2.0.0,<3.0.0'
+invenio_search_version = '>=2.0.0'
 
 extras_require = {
     'docs': [
         'Sphinx>=5.0.0',
     ],
     'opensearch2': [
-        'invenio-search[opensearch2]>=2.0.0,<3.0.0',
+        'invenio-search[opensearch2]>=2.0.0',
     ],
     'opensearch1': [
-        'invenio-search[opensearch1]>=2.0.0,<3.0.0',
+        'invenio-search[opensearch1]>=2.0.0',
     ],
     'elasticsearch7': [
         'invenio-search[elasticsearch7]>=2.0.0,<3.0.0',
