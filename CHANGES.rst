@@ -10,6 +10,10 @@
 Changes
 =======
 
+Version v2.0.0a2 (released 2024-07-18)
+
+- mappings: add mappings for opensearch v1 and v2
+
 Version v2.0.0a1 (released 2023-11-30)
 
 - breaking change: drops ES2 support
