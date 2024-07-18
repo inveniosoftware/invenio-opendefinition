@@ -30,15 +30,15 @@ def upsert_license_record(license):
     original ``id`` field, and one for the lower-case version of the field.
     """
     license_validator.validate(license)
-    license['$schema'] = 'http://{0}{1}/{2}'.format(
-        current_app.config['JSONSCHEMAS_HOST'],
-        current_app.config['JSONSCHEMAS_ENDPOINT'],
-        current_app.config['OPENDEFINITION_SCHEMAS_DEFAULT_LICENSE']
+    license["$schema"] = "http://{0}{1}/{2}".format(
+        current_app.config["JSONSCHEMAS_HOST"],
+        current_app.config["JSONSCHEMAS_ENDPOINT"],
+        current_app.config["OPENDEFINITION_SCHEMAS_DEFAULT_LICENSE"],
     )
 
     # Check if a record already exists under one of the available license IDs
     license_ids_to_mint = set()
-    license_ids = (license['id'], license['id'].lower())
+    license_ids = (license["id"], license["id"].lower())
     record = None
     for license_id in license_ids:
         try:
@@ -55,7 +55,7 @@ def upsert_license_record(license):
 
     for license_id in license_ids_to_mint:
         license_copy = deepcopy(record)
-        license_copy['id'] = license_id
+        license_copy["id"] = license_id
         license_minter(record.id, license_copy)
     return record
 
@@ -66,8 +66,7 @@ def harvest_opendefinition(filepath=None):
         with open(filepath) as fp:
             od_licenses = json.load(fp)
     else:
-        response = requests.get(
-            current_app.config['OPENDEFINITION_LICENSES_URL'])
+        response = requests.get(current_app.config["OPENDEFINITION_LICENSES_URL"])
         od_licenses = response.json()
     return od_licenses
 
@@ -78,29 +77,30 @@ def harvest_spdx(filepath=None):
         with open(filepath) as fp:
             spdx_payload = json.load(fp)
     else:
-        response = requests.get(
-            current_app.config['OPENDEFINITION_SPDX_LICENSES_URL'])
+        response = requests.get(current_app.config["OPENDEFINITION_SPDX_LICENSES_URL"])
         spdx_payload = response.json()
 
     # Preprocess the SPDX licenses to conform to the OpenDefinition schema
     licenses = {}
-    for license_ in spdx_payload['licenses']:
-        licenses[license_['licenseId']] = {
-            'id': license_['licenseId'],
+    for license_ in spdx_payload["licenses"]:
+        licenses[license_["licenseId"]] = {
+            "id": license_["licenseId"],
             # Last link is the most recent/valid
-            'url': (license_['seeAlso'][-1]
-                    if license_['seeAlso']
-                    else license_['reference']),
-            'title': license_['name'],
-            'family': '',
-            'maintainer': '',
-            'status': ('retired' if license_['isDeprecatedLicenseId']
-                       else 'active'),
-            'osd_conformance': ('approved' if license_['isOsiApproved']
-                                else 'not reviewed'),
-            'od_conformance': 'not reviewed',
-            'domain_content': False,
-            'domain_data': False,
-            'domain_software': False,
+            "url": (
+                license_["seeAlso"][-1]
+                if license_["seeAlso"]
+                else license_["reference"]
+            ),
+            "title": license_["name"],
+            "family": "",
+            "maintainer": "",
+            "status": ("retired" if license_["isDeprecatedLicenseId"] else "active"),
+            "osd_conformance": (
+                "approved" if license_["isOsiApproved"] else "not reviewed"
+            ),
+            "od_conformance": "not reviewed",
+            "domain_content": False,
+            "domain_data": False,
+            "domain_software": False,
         }
     return licenses

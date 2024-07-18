@@ -15,8 +15,4 @@ from invenio_pidstore.fetchers import FetchedPID
 
 def license_fetcher(record_uuid, data):
     """Fetch PID from license record."""
-    return FetchedPID(
-        provider=None,
-        pid_type='od_lic',
-        pid_value=str(data['id'])
-    )
+    return FetchedPID(provider=None, pid_type="od_lic", pid_value=str(data["id"]))

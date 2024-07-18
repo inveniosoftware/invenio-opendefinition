@@ -21,16 +21,16 @@ def opendefinition():
     pass
 
 
-@opendefinition.command('loadlicenses')
-@click.option('--source', '-s', default='opendefinition')
-@click.option('--path', '-p', type=click.Path(exists=True, dir_okay=False))
-@click.option('--eager', '-e', is_flag=True)
+@opendefinition.command("loadlicenses")
+@click.option("--source", "-s", default="opendefinition")
+@click.option("--path", "-p", type=click.Path(exists=True, dir_okay=False))
+@click.option("--eager", "-e", is_flag=True)
 def loadlicenses(source, path=None, eager=False):
     """Load licenses to local database."""
-    click.secho('Loading licenses from {}'.format(source), fg='blue')
+    click.secho("Loading licenses from {}".format(source), fg="blue")
     task = harvest_licenses.s(source, path=path, eager=eager)
     if eager:
         task.apply(throw=True)
     else:
         task.apply_async()
-        click.echo('Loading licenses in a background job.')
+        click.echo("Loading licenses in a background job.")

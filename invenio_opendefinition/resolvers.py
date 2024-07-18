@@ -16,7 +16,7 @@ from invenio_records.api import Record
 from werkzeug.routing import Rule
 
 license_resolver = Resolver(
-    pid_type='od_lic', object_type='rec', getter=Record.get_record
+    pid_type="od_lic", object_type="rec", getter=Record.get_record
 )
 
 
@@ -30,7 +30,11 @@ def resolve_license_jsonref(pid):
 def jsonresolver_loader(url_map):
     """Resolve OpenDefinition licenses."""
     from flask import current_app
-    url_map.add(Rule(
-        '/licenses/<path:pid>',
-        endpoint=resolve_license_jsonref,
-        host=current_app.config['OPENDEFINITION_JSONRESOLVER_HOST']))
+
+    url_map.add(
+        Rule(
+            "/licenses/<path:pid>",
+            endpoint=resolve_license_jsonref,
+            host=current_app.config["OPENDEFINITION_JSONRESOLVER_HOST"],
+        )
+    )

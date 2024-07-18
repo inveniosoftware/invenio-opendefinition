@@ -19,13 +19,11 @@ def test_license_jsonref_resolver(app, loaded_example_licenses):
     """Test resolver."""
     with app.app_context():
         example_license = {
-            'license': {'$ref': 'http://inveniosoftware.org/licenses/mit'}
+            "license": {"$ref": "http://inveniosoftware.org/licenses/mit"}
         }
 
-        json_resolver = JSONResolver(plugins=[
-            'invenio_opendefinition.resolvers'
-        ])
+        json_resolver = JSONResolver(plugins=["invenio_opendefinition.resolvers"])
         loader_cls = json_loader_factory(json_resolver)
         loader = loader_cls()
         out_json = JsonRef.replace_refs(example_license, loader=loader)
-        assert out_json['license'] == loaded_example_licenses['MIT']
+        assert out_json["license"] == loaded_example_licenses["MIT"]

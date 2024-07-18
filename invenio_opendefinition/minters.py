@@ -16,9 +16,9 @@ from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 def license_minter(record_uuid, data):
     """Mint a persistent identifier for a license."""
     return PersistentIdentifier.create(
-        'od_lic',
-        data['id'],
-        object_type='rec',
+        "od_lic",
+        data["id"],
+        object_type="rec",
         object_uuid=record_uuid,
-        status=PIDStatus.REGISTERED
+        status=PIDStatus.REGISTERED,
     )

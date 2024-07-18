@@ -18,17 +18,18 @@ from invenio_opendefinition import InvenioOpenDefinition
 def test_version():
     """Test version import."""
     from invenio_opendefinition import __version__
+
     assert __version__
 
 
 def test_init():
     """Test extension initialization."""
-    app = Flask('testapp')
+    app = Flask("testapp")
     ext = InvenioOpenDefinition(app)
-    assert 'invenio-opendefinition' in app.extensions
+    assert "invenio-opendefinition" in app.extensions
 
-    app = Flask('testapp')
+    app = Flask("testapp")
     ext = InvenioOpenDefinition()
-    assert 'invenio-opendefinition' not in app.extensions
+    assert "invenio-opendefinition" not in app.extensions
     ext.init_app(app)
-    assert 'invenio-opendefinition' in app.extensions
+    assert "invenio-opendefinition" in app.extensions

@@ -31,7 +31,7 @@ class InvenioOpenDefinition(object):
     @cached_property
     def loaders(self):
         """License loaders dictionary."""
-        loaders = current_app.config['OPENDEFINITION_LOADERS']
+        loaders = current_app.config["OPENDEFINITION_LOADERS"]
         return {k: obj_or_import_string(v) for k, v in loaders.items()}
 
     def init_app(self, app):
@@ -39,10 +39,10 @@ class InvenioOpenDefinition(object):
         self.init_config(app)
         app.cli.add_command(opendefinition)
         before_record_index.connect(indexer_receiver, sender=app)
-        app.extensions['invenio-opendefinition'] = self
+        app.extensions["invenio-opendefinition"] = self
 
     def init_config(self, app):
         """Initialize configuration."""
         for k in dir(config):
-            if k.startswith('OPENDEFINITION_'):
+            if k.startswith("OPENDEFINITION_"):
                 app.config.setdefault(k, getattr(config, k))
