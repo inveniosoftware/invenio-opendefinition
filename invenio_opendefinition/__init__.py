@@ -15,7 +15,7 @@ from .proxies import current_opendefinition
 from .version import __version__
 
 __all__ = (
-    '__version__',
-    'current_opendefinition',
-    'InvenioOpenDefinition',
+    "__version__",
+    "current_opendefinition",
+    "InvenioOpenDefinition",
 )

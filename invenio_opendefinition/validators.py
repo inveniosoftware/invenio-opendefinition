@@ -22,7 +22,8 @@ def validator_factory(schema_filename):
     return jsonschema.Draft4Validator(schema_json)
 
 
-license_validator = validator_factory(pkg_resources.resource_filename(
-    'invenio_opendefinition',
-    'jsonschemas/licenses/license-v1.0.0.json'
-))
+license_validator = validator_factory(
+    pkg_resources.resource_filename(
+        "invenio_opendefinition", "jsonschemas/licenses/license-v1.0.0.json"
+    )
+)

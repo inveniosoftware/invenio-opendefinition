@@ -30,8 +30,7 @@ from invenio_records import InvenioRecords
 from invenio_records_rest.utils import PIDConverter
 from invenio_search import InvenioSearch, current_search
 from invenio_search.engine import search
-from sqlalchemy_utils.functions import create_database, database_exists, \
-    drop_database
+from sqlalchemy_utils.functions import create_database, database_exists, drop_database
 
 from invenio_opendefinition import InvenioOpenDefinition
 from invenio_opendefinition.loaders import upsert_license_record
@@ -41,11 +40,10 @@ from invenio_opendefinition.loaders import upsert_license_record
 def app(od_licenses_json):
     """Flask application fixture."""
     instance_path = tempfile.mkdtemp()
-    app = Flask('testapp', instance_path=instance_path)
+    app = Flask("testapp", instance_path=instance_path)
     app.config.update(
-        JSONSCHEMAS_HOST='localhost',
-        SQLALCHEMY_DATABASE_URI=os.environ.get(
-            'SQLALCHEMY_DATABASE_URI', 'sqlite://'),
+        JSONSCHEMAS_HOST="localhost",
+        SQLALCHEMY_DATABASE_URI=os.environ.get("SQLALCHEMY_DATABASE_URI", "sqlite://"),
         TESTING=True,
         RECORDS_REST_DEFAULT_READ_PERMISSION_FACTORY=None,
         CELERY_ALWAYS_EAGER=True,
@@ -54,7 +52,7 @@ def app(od_licenses_json):
         CELERY_EAGER_PROPAGATES_EXCEPTIONS=True,
     )
 
-    app.url_map.converters['pid'] = PIDConverter
+    app.url_map.converters["pid"] = PIDConverter
 
     FlaskCeleryExt(app)
     InvenioDB(app)
@@ -65,17 +63,19 @@ def app(od_licenses_json):
     InvenioOpenDefinition(app)
 
     with app.app_context():
-        if str(db.engine.url) != "sqlite://" and \
-           not database_exists(str(db.engine.url)):
+        if str(db.engine.url) != "sqlite://" and not database_exists(
+            str(db.engine.url)
+        ):
             create_database(str(db.engine.url))
 
         # MySQL has case-sensitivity issues with its default collation. To fix
         # this, we alter the created database's charset and collation.
-        if str(db.engine.url).startswith('mysql'):
+        if str(db.engine.url).startswith("mysql"):
             conn = db.engine.connect()
-            conn.execute('COMMIT')  # close the current transaction
-            conn.execute('ALTER DATABASE invenio '
-                         'CHARACTER SET utf8 COLLATE utf8_bin')
+            conn.execute("COMMIT")  # close the current transaction
+            conn.execute(
+                "ALTER DATABASE invenio " "CHARACTER SET utf8 COLLATE utf8_bin"
+            )
             conn.close()
         db.drop_all()
         db.create_all()
@@ -104,7 +104,7 @@ def loaded_example_licenses(app, es, od_licenses_json):
             license_records[key] = upsert_license_record(license)
             db.session.commit()
             RecordIndexer().index_by_id(license_records[key].id)
-    es.flush_and_refresh('licenses')
+    es.flush_and_refresh("licenses")
     return license_records
 
 
@@ -113,15 +113,15 @@ def license_server_mock(app, od_licenses_json, spdx_licenses_json):
     """License server mock fixture."""
     httpretty.register_uri(
         httpretty.GET,
-        app.config['OPENDEFINITION_LICENSES_URL'],
+        app.config["OPENDEFINITION_LICENSES_URL"],
         body=json.dumps(od_licenses_json),
-        content_type='application/json'
+        content_type="application/json",
     )
     httpretty.register_uri(
         httpretty.GET,
-        app.config['OPENDEFINITION_SPDX_LICENSES_URL'],
+        app.config["OPENDEFINITION_SPDX_LICENSES_URL"],
         body=json.dumps(spdx_licenses_json),
-        content_type='application/json'
+        content_type="application/json",
     )
     httpretty.enable()
     yield
@@ -131,7 +131,7 @@ def license_server_mock(app, od_licenses_json, spdx_licenses_json):
 @pytest.fixture(scope="session")
 def od_licenses_path():
     """OD licenses JSON path fixture."""
-    return join(dirname(__file__), 'data', 'opendefinition.json')
+    return join(dirname(__file__), "data", "opendefinition.json")
 
 
 @pytest.fixture(scope="session")
@@ -144,7 +144,7 @@ def od_licenses_json(od_licenses_path):
 @pytest.fixture(scope="session")
 def spdx_licenses_path():
     """SPDX licenses JSON path fixture."""
-    return join(dirname(__file__), 'data', 'spdx.json')
+    return join(dirname(__file__), "data", "spdx.json")
 
 
 @pytest.fixture(scope="session")
@@ -157,9 +157,11 @@ def spdx_licenses_json(spdx_licenses_path):
 @pytest.yield_fixture
 def es(app):
     """Provide elasticsearch access."""
-    app.config.update(dict(
-        SEARCH_AUTOINDEX=[],
-    ))
+    app.config.update(
+        dict(
+            SEARCH_AUTOINDEX=[],
+        )
+    )
     InvenioSearch(app)
     with app.app_context():
         try:
