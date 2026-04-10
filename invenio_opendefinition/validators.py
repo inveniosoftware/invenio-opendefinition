@@ -8,10 +8,10 @@
 
 """JSON schema validators."""
 
+import importlib.resources
 import json
 
 import jsonschema
-import importlib.resources
 
 
 def validator_factory(schema_filename):
@@ -23,7 +23,7 @@ def validator_factory(schema_filename):
 
 
 license_validator = validator_factory(
-    importlib.resources.files(
-        "invenio_opendefinition").joinpath("jsonschemas/licenses/license-v1.0.0.json"
-                                           )
+    importlib.resources.files("invenio_opendefinition").joinpath(
+        "jsonschemas/licenses/license-v1.0.0.json"
+    )
 )
