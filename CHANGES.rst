@@ -10,6 +10,10 @@
 Changes
 =======
 
+Version v2.0.0a3 (released 2026-04-10)
+
+- chore: remove pkg_resources
+
 Version v2.0.0a2 (released 2024-07-18)
 
 - mappings: add mappings for opensearch v1 and v2
