@@ -17,10 +17,15 @@ history = open("CHANGES.rst").read()
 
 tests_require = [
     "httpretty>=1.0.3",
-    "pytest-black>=0.3.0,<0.3.10",
-    "pytest-invenio>=1.4.0",
     "invenio-db[versioning]>=1.0.14",
-    "Sphinx>=5.0.0",
+    "pytest-black>=0.3.0",
+    "mock>=2.0.0",
+    "pytest-invenio>=3.4.2",
+    "docker-services-cli>=0.6.0",
+    "pydocstyle==6.1.1",
+    "pytest-mock>=1.6.0",
+    "sphinx>=5",
+    "pluggy>=1.6.0",
 ]
 
 invenio_search_version = ">=2.0.0"
